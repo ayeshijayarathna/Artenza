@@ -1,59 +1,99 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
 import Navbar from "./Navbar";
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.15, delayChildren: 0.3 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-section via-page to-section" />
-
-      <div className="absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, #C4724A 0%, transparent 50%),
-                            radial-gradient(circle at 75% 75%, #B07E6E 0%, transparent 50%)`,
-        }}
-      />
-
+    <section id="hero" className="relative min-h-screen bg-page pt-16">
       <Navbar />
 
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <p className="text-accent text-sm tracking-[0.3em] uppercase mb-6 font-medium">
-          Art Gallery &amp; Custom Commissions
-        </p>
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[calc(100vh-4rem)] flex items-center"
+      >
+        <div className="grid lg:grid-cols-5 gap-12 items-center w-full">
+          <div className="lg:col-span-3 space-y-8">
+            <motion.p variants={item} className="text-accent text-sm tracking-[0.25em] uppercase font-medium">
+              Art Gallery &amp; Custom Commissions
+            </motion.p>
 
-        <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-heading leading-tight mb-6">
-          Where Art Meets
-          <span className="text-accent block">Renaissance</span>
-        </h1>
+            <motion.h1 variants={item} className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-heading leading-[1.1]">
+              Where Art
+              <br />
+              Finds Its Home
+            </motion.h1>
 
-        <p className="text-muted text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          Curated artwork from visionary artists. Commission custom pieces that
-          speak to your soul. Experience art in a new dimension.
-        </p>
+            <motion.p variants={item} className="text-muted text-lg max-w-lg leading-relaxed">
+              Curated artwork from visionary artists. Commission custom pieces that
+              speak to your soul. Experience art reimagined for the modern age.
+            </motion.p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="/register"
-            className="px-8 py-3 bg-accent text-white font-medium rounded-md hover:bg-accent-hover transition-colors text-sm tracking-wide">
-            Explore the Gallery
-          </a>
-          <a href="#gallery"
-            className="px-8 py-3 border border-accent/40 text-accent font-medium rounded-md hover:bg-accent/5 transition-colors text-sm tracking-wide">
-            View Collection
-          </a>
+            <motion.div variants={item} className="flex flex-wrap gap-4 pt-2">
+              <a
+                href="/register"
+                className="px-7 py-3 bg-accent text-white text-sm font-medium rounded-md hover:bg-accent-hover transition-colors"
+              >
+                Explore Gallery
+              </a>
+              <a
+                href="#gallery"
+                className="px-7 py-3 border border-accent text-accent text-sm font-medium rounded-md hover:bg-accent/5 transition-colors"
+              >
+                Commission Art
+              </a>
+            </motion.div>
+
+            <motion.div variants={item} className="flex items-center gap-6 pt-4">
+              <div className="flex -space-x-2">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="w-8 h-8 rounded-full border-2 border-card bg-section"
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-muted">
+                Join <strong className="text-heading">2,400+</strong> collectors
+              </span>
+            </motion.div>
+          </div>
+
+          <motion.div
+            variants={item}
+            className="lg:col-span-2 relative"
+          >
+            <div className="relative rounded-2xl overflow-hidden border-4 border-accent/30 shadow-xl">
+              <div className="absolute inset-0 bg-accent/5 z-10 pointer-events-none" />
+              <Image
+                src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=800&auto=format"
+                alt="Art gallery showcase"
+                width={800}
+                height={1000}
+                className="w-full h-auto object-cover aspect-[3/4]"
+                priority
+              />
+            </div>
+            <div className="absolute -bottom-4 -left-4 bg-card border border-border rounded-lg px-4 py-3 shadow-sm hidden sm:block">
+              <p className="text-xs text-muted">Curated Collection</p>
+              <p className="text-sm font-semibold text-heading">200+ Artworks</p>
+            </div>
+          </motion.div>
         </div>
-
-        <div className="mt-16 flex items-center justify-center gap-8 text-hint text-xs tracking-widest uppercase">
-          <span>Oil on Canvas</span>
-          <span className="w-1 h-1 rounded-full bg-hint" />
-          <span>Sculpture</span>
-          <span className="w-1 h-1 rounded-full bg-hint" />
-          <span>Digital Art</span>
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg className="w-5 h-5 text-hint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </div>
+      </motion.div>
     </section>
   );
 }
