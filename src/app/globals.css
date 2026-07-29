@@ -3,28 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --color-obsidian: #1C1917;
-  --color-charcoal: #292524;
-  --color-warm-gray: #44403C;
-  --color-gold: #C9A96E;
-  --color-linen: #F5F0E8;
-  --color-sage: #A8B5A2;
-  --color-terracotta: #B5846A;
-  --color-dusty-rose: #C4A8B0;
-  --color-slate-teal: #7A8C8A;
-  --color-peach-mist: #E8C4B0;
+  --bg-page: #FBF7F2;
+  --bg-section: #F5EFE6;
+  --bg-card: #FFFFFF;
+  --bg-hover: #E8DDD0;
+  --border: #EDE6DC;
 
-  --bg-primary: var(--color-obsidian);
-  --bg-card: var(--color-charcoal);
-  --text-primary: var(--color-linen);
-  --text-muted: var(--color-warm-gray);
-  --accent: var(--color-gold);
-  --accent-warm: var(--color-terracotta);
+  --accent: #C4724A;
+  --accent-hover: #E8A87C;
+  --accent-warm: #B07E6E;
+  --accent-violet: #8F7B9E;
+  --accent-sage: #7A9E8A;
+
+  --text-heading: #2C2420;
+  --text-body: #5C4A3A;
+  --text-muted: #8C7B6B;
+  --text-hint: #A0917E;
 }
 
 body {
-  color: var(--text-primary);
-  background: var(--bg-primary);
+  color: var(--text-body);
+  background: var(--bg-page);
 }
 
 @layer utilities {
@@ -35,6 +34,6 @@ body {
 
 @layer base {
   * {
-    @apply border-warm-gray/20;
+    @apply border-border;
   }
 }

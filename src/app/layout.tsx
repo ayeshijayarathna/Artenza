@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${fontSans.variable} ${fontSerif.variable} font-sans antialiased bg-bg-primary text-text-primary`}
+        className={`${fontSans.variable} ${fontSerif.variable} font-sans antialiased bg-page text-body`}
       >
         {children}
       </body>

@@ -9,28 +9,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        obsidian: "#1C1917",
-        charcoal: "#292524",
-        "warm-gray": "#44403C",
-        gold: "#C9A96E",
-        linen: "#F5F0E8",
-        sage: "#A8B5A2",
-        terracotta: "#B5846A",
-        "dusty-rose": "#C4A8B0",
-        "slate-teal": "#7A8C8A",
-        "peach-mist": "#E8C4B0",
-        bg: {
-          primary: "var(--bg-primary)",
-          card: "var(--bg-card)",
-        },
-        text: {
-          primary: "var(--text-primary)",
-          muted: "var(--text-muted)",
-        },
+        page: "var(--bg-page)",
+        section: "var(--bg-section)",
+        card: "var(--bg-card)",
+        "bg-hover": "var(--bg-hover)",
+        border: "var(--border)",
         accent: {
           DEFAULT: "var(--accent)",
+          hover: "var(--accent-hover)",
           warm: "var(--accent-warm)",
+          violet: "var(--accent-violet)",
+          sage: "var(--accent-sage)",
         },
+        heading: "var(--text-heading)",
+        body: "var(--text-body)",
+        muted: "var(--text-muted)",
+        hint: "var(--text-hint)",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Georgia", "serif"],
