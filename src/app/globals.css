@@ -3,27 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --bg-page: #FBF7F2;
-  --bg-section: #F5EFE6;
-  --bg-card: #FFFFFF;
-  --bg-hover: #E8DDD0;
-  --border: #EDE6DC;
+  --bg-page-rgb: 251, 247, 242;
+  --bg-section-rgb: 245, 239, 230;
+  --bg-card-rgb: 255, 255, 255;
+  --bg-hover-rgb: 232, 221, 208;
+  --border-rgb: 237, 230, 220;
 
-  --accent: #C4724A;
-  --accent-hover: #E8A87C;
-  --accent-warm: #B07E6E;
-  --accent-violet: #8F7B9E;
-  --accent-sage: #7A9E8A;
+  --accent-rgb: 196, 114, 74;
+  --accent-hover-rgb: 232, 168, 124;
+  --accent-warm-rgb: 176, 126, 110;
+  --accent-violet-rgb: 143, 123, 158;
+  --accent-sage-rgb: 122, 158, 138;
 
-  --text-heading: #2C2420;
-  --text-body: #5C4A3A;
-  --text-muted: #8C7B6B;
-  --text-hint: #A0917E;
+  --text-heading-rgb: 44, 36, 32;
+  --text-body-rgb: 92, 74, 58;
+  --text-muted-rgb: 140, 123, 107;
+  --text-hint-rgb: 160, 145, 126;
+}
+
+html.dark {
+  --bg-page-rgb: 28, 24, 22;
+  --bg-section-rgb: 34, 30, 26;
+  --bg-card-rgb: 42, 37, 33;
+  --bg-hover-rgb: 56, 49, 44;
+  --border-rgb: 61, 53, 46;
+
+  --accent-rgb: 196, 114, 74;
+  --accent-hover-rgb: 217, 153, 117;
+  --accent-warm-rgb: 176, 126, 110;
+  --accent-violet-rgb: 143, 123, 158;
+  --accent-sage-rgb: 122, 158, 138;
+
+  --text-heading-rgb: 245, 239, 230;
+  --text-body-rgb: 212, 201, 186;
+  --text-muted-rgb: 160, 145, 126;
+  --text-hint-rgb: 140, 123, 107;
 }
 
 body {
-  color: var(--text-body);
-  background: var(--bg-page);
+  color: rgb(var(--text-body-rgb));
+  background: rgb(var(--bg-page-rgb));
 }
 
 @layer utilities {

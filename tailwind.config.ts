@@ -9,19 +9,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        page: "#FBF7F2",
-        section: "#F5EFE6",
-        card: "#FFFFFF",
-        border: "#EDE6DC",
+        page: "rgb(var(--bg-page-rgb) / <alpha-value>)",
+        section: "rgb(var(--bg-section-rgb) / <alpha-value>)",
+        card: "rgb(var(--bg-card-rgb) / <alpha-value>)",
+        "bg-hover": "rgb(var(--bg-hover-rgb) / <alpha-value>)",
+        border: "rgb(var(--border-rgb) / <alpha-value>)",
         accent: {
-          DEFAULT: "#C4724A",
-          hover: "#E8A87C",
-          violet: "#8F7B9E",
-          sage: "#7A9E8A",
+          DEFAULT: "rgb(var(--accent-rgb) / <alpha-value>)",
+          hover: "rgb(var(--accent-hover-rgb) / <alpha-value>)",
+          warm: "rgb(var(--accent-warm-rgb) / <alpha-value>)",
+          violet: "rgb(var(--accent-violet-rgb) / <alpha-value>)",
+          sage: "rgb(var(--accent-sage-rgb) / <alpha-value>)",
         },
-        heading: "#2C2420",
-        body: "#5C4A3A",
-        muted: "#8C7B6B",
+        heading: "rgb(var(--text-heading-rgb) / <alpha-value>)",
+        body: "rgb(var(--text-body-rgb) / <alpha-value>)",
+        muted: "rgb(var(--text-muted-rgb) / <alpha-value>)",
+        hint: "rgb(var(--text-hint-rgb) / <alpha-value>)",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Playfair Display", "Georgia", "serif"],

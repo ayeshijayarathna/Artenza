@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -15,6 +16,7 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -58,6 +60,13 @@ export default function Navbar() {
             </nav>
 
             <div className="hidden md:flex items-center gap-3">
+              <button
+                onClick={toggleTheme}
+                className="w-9 h-9 flex items-center justify-center rounded-full border border-border text-muted hover:text-accent hover:border-accent transition-colors"
+                aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+              >
+                {theme === "light" ? <Moon size="16" /> : <Sun size="16" />}
+              </button>
               <a
                 href="/customize"
                 className="px-4 py-2 text-sm text-accent border border-accent rounded-md hover:bg-accent/5 transition-colors"
@@ -101,7 +110,14 @@ export default function Navbar() {
                   {link.label}
                 </button>
               ))}
-              <div className="flex gap-3 pt-3 border-t border-border">
+              <div className="flex items-center gap-3 pt-3 border-t border-border">
+                <button
+                  onClick={toggleTheme}
+                  className="w-9 h-9 flex items-center justify-center rounded-full border border-border text-muted hover:text-accent hover:border-accent transition-colors shrink-0"
+                  aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+                >
+                  {theme === "light" ? <Moon size="16" /> : <Sun size="16" />}
+                </button>
                 <a
                   href="/customize"
                   className="flex-1 text-center px-3 py-2 text-sm text-accent border border-accent rounded-md hover:bg-accent/5 transition-colors"
