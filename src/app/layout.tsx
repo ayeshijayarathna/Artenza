@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import ThemeProvider from "@/components/ThemeProvider";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 const fontSans = Inter({
@@ -26,11 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontSerif.variable} font-sans antialiased bg-page text-body`}
+        className={`${fontSans.variable} ${fontSerif.variable} font-sans antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

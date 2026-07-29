@@ -24,7 +24,8 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem("artenza-theme") as Theme | null;
-    const preferred = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const preferred =
+      stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     setTheme(preferred);
     document.documentElement.classList.toggle("dark", preferred === "dark");
     setMounted(true);

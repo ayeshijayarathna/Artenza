@@ -6,43 +6,42 @@
   --bg-page-rgb: 251, 247, 242;
   --bg-section-rgb: 245, 239, 230;
   --bg-card-rgb: 255, 255, 255;
-  --bg-hover-rgb: 232, 221, 208;
   --border-rgb: 237, 230, 220;
 
   --accent-rgb: 196, 114, 74;
-  --accent-hover-rgb: 232, 168, 124;
-  --accent-warm-rgb: 176, 126, 110;
-  --accent-violet-rgb: 143, 123, 158;
-  --accent-sage-rgb: 122, 158, 138;
+  --accent-hover-rgb: 181, 102, 62;
+  --secondary-rgb: 143, 123, 158;
+  --success-rgb: 122, 158, 138;
 
   --text-heading-rgb: 44, 36, 32;
   --text-body-rgb: 92, 74, 58;
   --text-muted-rgb: 140, 123, 107;
-  --text-hint-rgb: 160, 145, 126;
 }
 
 html.dark {
-  --bg-page-rgb: 28, 24, 22;
-  --bg-section-rgb: 34, 30, 26;
-  --bg-card-rgb: 42, 37, 33;
-  --bg-hover-rgb: 56, 49, 44;
-  --border-rgb: 61, 53, 46;
+  --bg-page-rgb: 30, 27, 24;
+  --bg-section-rgb: 38, 34, 31;
+  --bg-card-rgb: 42, 38, 35;
+  --border-rgb: 58, 52, 47;
 
-  --accent-rgb: 196, 114, 74;
-  --accent-hover-rgb: 217, 153, 117;
-  --accent-warm-rgb: 176, 126, 110;
-  --accent-violet-rgb: 143, 123, 158;
-  --accent-sage-rgb: 122, 158, 138;
+  --accent-rgb: 208, 138, 101;
+  --accent-hover-rgb: 196, 122, 85;
+  --secondary-rgb: 178, 166, 192;
+  --success-rgb: 143, 179, 163;
 
   --text-heading-rgb: 245, 239, 230;
-  --text-body-rgb: 212, 201, 186;
-  --text-muted-rgb: 160, 145, 126;
-  --text-hint-rgb: 140, 123, 107;
+  --text-body-rgb: 214, 204, 194;
+  --text-muted-rgb: 168, 159, 148;
 }
 
 body {
   color: rgb(var(--text-body-rgb));
   background: rgb(var(--bg-page-rgb));
+  transition: color 0.3s, background-color 0.3s;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @layer utilities {

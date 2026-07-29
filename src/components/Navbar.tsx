@@ -6,9 +6,10 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
+  { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Gallery", href: "#gallery" },
   { label: "Features", href: "#features" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Team", href: "#team" },
   { label: "Contact", href: "#contact" },
 ];
@@ -26,12 +27,13 @@ export default function Navbar() {
 
   const handleClick = (href: string) => {
     setOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-card transition-shadow duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-card transition-all duration-300 ${
         scrolled ? "shadow-md" : "shadow-none"
       }`}
     >
@@ -39,8 +41,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <a
-              href="#hero"
-              onClick={(e) => { e.preventDefault(); handleClick("#hero"); }}
+              href="#home"
+              onClick={(e) => { e.preventDefault(); handleClick("#home"); }}
               className="font-serif text-2xl font-bold text-heading tracking-wide"
             >
               Artenza
@@ -65,11 +67,11 @@ export default function Navbar() {
                 className="w-9 h-9 flex items-center justify-center rounded-full border border-border text-muted hover:text-accent hover:border-accent transition-colors"
                 aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
               >
-                {theme === "light" ? <Moon size="16" /> : <Sun size="16" />}
+                {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
               </button>
               <a
                 href="/customize"
-                className="px-4 py-2 text-sm text-accent border border-accent rounded-md hover:bg-accent/5 transition-colors"
+                className="px-4 py-2 text-sm text-accent border border-accent rounded-md hover:bg-accent/10 transition-colors"
               >
                 Customize Request
               </a>
@@ -116,11 +118,11 @@ export default function Navbar() {
                   className="w-9 h-9 flex items-center justify-center rounded-full border border-border text-muted hover:text-accent hover:border-accent transition-colors shrink-0"
                   aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
                 >
-                  {theme === "light" ? <Moon size="16" /> : <Sun size="16" />}
+                  {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
                 </button>
                 <a
                   href="/customize"
-                  className="flex-1 text-center px-3 py-2 text-sm text-accent border border-accent rounded-md hover:bg-accent/5 transition-colors"
+                  className="flex-1 text-center px-3 py-2 text-sm text-accent border border-accent rounded-md hover:bg-accent/10 transition-colors"
                 >
                   Customize Request
                 </a>
