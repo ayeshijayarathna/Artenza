@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
-import ThemeProvider from "@/components/ThemeProvider";
+import { ThemeProvider } from "next-themes";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 
@@ -16,7 +16,7 @@ const fontSerif = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Artenza — Art Gallery & Custom Commissions",
+  title: "Artenza — Premium Art Gallery & Commissions",
   description:
     "Discover curated artwork and commission custom pieces. Artenza brings art and Renaissance together.",
 };
@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${fontSans.variable} ${fontSerif.variable} font-sans antialiased`}
       >
-        <ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
           <Navbar />
           {children}
         </ThemeProvider>

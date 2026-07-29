@@ -19,7 +19,7 @@ function ArtImage({ src, alt }: { src: string; alt: string }) {
   const [error, setError] = useState(false);
 
   return (
-    <div className="absolute inset-0 bg-image-fallback">
+    <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-secondary/10">
       {!error && (
         <img
           src={src}
@@ -40,9 +40,13 @@ export default function GalleryPreview() {
 
   const filtered = active === "All" ? artworks : artworks.filter((a) => a.category === active);
 
+  const handleBuyNow = () => {
+    window.location.href = "/auth/login";
+  };
+
   return (
     <section id="gallery" className="relative py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-grain pointer-events-none" />
+      <div className="absolute top-1/4 right-1/3 w-[400px] h-[400px] rounded-full bg-secondary/[0.03] blur-[100px] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -55,11 +59,11 @@ export default function GalleryPreview() {
             Explore Gallery
           </p>
           <h2 className="font-serif text-4xl sm:text-5xl font-bold text-heading mt-4 leading-tight">
-            Curated
+            Explore Our
             <br />
-            <span className="text-accent">Masterpieces</span>
+            <span className="text-accent">Collection</span>
           </h2>
-          <div className="w-16 h-0.5 bg-gradient-to-r from-accent to-accent/30 mx-auto mt-6" />
+          <div className="w-16 h-[2px] bg-gradient-to-r from-accent to-accent/30 mx-auto mt-6" />
         </motion.div>
 
         <div className="flex flex-wrap justify-center gap-3 mb-12">
@@ -70,7 +74,7 @@ export default function GalleryPreview() {
               className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
                 active === cat
                   ? "bg-accent text-white shadow-md"
-                  : "bg-card/60 backdrop-blur-sm border border-border text-muted hover:text-accent hover:border-accent hover:bg-accent/5"
+                  : "bg-section/60 border border-border/60 text-muted hover:text-accent hover:border-accent/50"
               }`}
             >
               {cat}
@@ -85,7 +89,7 @@ export default function GalleryPreview() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {filtered.map((art) => (
               <motion.div
@@ -95,22 +99,22 @@ export default function GalleryPreview() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className="group bg-card/80 backdrop-blur-sm border border-border rounded-2xl overflow-hidden hover:shadow-glow transition-all duration-300"
+                className="group bg-card border border-border rounded-3xl overflow-hidden hover:shadow-organic hover:border-accent/20 transition-all duration-300"
               >
                 <div className="relative overflow-hidden aspect-[4/3]">
                   <ArtImage src={art.img} alt={art.title} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
                   <span
-                    className={`absolute top-4 right-4 z-20 px-3 py-1 text-[11px] font-medium rounded-full backdrop-blur-md ${
+                    className={`absolute top-4 right-4 z-10 px-3 py-1 text-[11px] font-medium rounded-full backdrop-blur-sm ${
                       art.available
-                        ? "bg-success/30 text-white"
-                        : "bg-muted/30 text-white"
+                        ? "bg-black/30 text-white"
+                        : "bg-black/20 text-white/70"
                     }`}
                   >
                     {art.available ? "Available" : "Sold"}
                   </span>
                 </div>
-                <div className="p-5 relative z-10">
+                <div className="p-5">
                   <h3 className="font-serif text-lg font-semibold text-heading">{art.title}</h3>
                   <p className="text-sm text-muted mt-0.5">{art.artist}</p>
                   <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
@@ -119,7 +123,10 @@ export default function GalleryPreview() {
                       <button className="px-3 py-1.5 text-xs text-accent border border-accent/40 rounded-full hover:bg-accent/10 hover:border-accent transition-all duration-200">
                         View
                       </button>
-                      <button className="px-3 py-1.5 text-xs text-white bg-accent rounded-full hover:bg-accent-hover transition-all duration-200">
+                      <button
+                        onClick={handleBuyNow}
+                        className="px-3 py-1.5 text-xs text-white bg-accent rounded-full hover:bg-accent-hover transition-all duration-200"
+                      >
                         Buy Now
                       </button>
                     </div>

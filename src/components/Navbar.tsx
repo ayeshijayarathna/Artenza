@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "next-themes";
 
 const navLinks = [
   { label: "About", href: "#about" },
-  { label: "Features", href: "#features" },
   { label: "Gallery", href: "#gallery" },
+  { label: "Features", href: "#features" },
   { label: "Team", href: "#team" },
   { label: "Contact", href: "#contact" },
 ];
@@ -16,7 +16,10 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -32,14 +35,14 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-glass shadow-soft border-b border-border"
-          : "bg-transparent"
+          ? "bg-page/70 backdrop-blur-xl border-b border-border shadow-sm"
+          : "bg-transparent border-b border-border/20"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex items-center justify-between h-16 ${scrolled ? "" : "border-b border-border/40"}`}>
+        <div className="flex items-center justify-between h-16">
           <a
             href="#home"
             onClick={(e) => { e.preventDefault(); handleClick("#home"); }}
@@ -56,22 +59,24 @@ export default function Navbar() {
                 className="relative text-sm text-body hover:text-accent transition-colors py-1 group"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-px left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="w-9 h-9 flex items-center justify-center rounded-full border border-border/60 text-muted hover:text-accent hover:border-accent transition-all duration-200"
-              aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            >
-              {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
-            </button>
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="w-9 h-9 flex items-center justify-center rounded-full border border-border/60 text-muted hover:text-accent hover:border-accent transition-all duration-200"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+              </button>
+            )}
             <a
               href="/customize"
-              className="px-4 py-2 text-sm text-accent border border-accent/40 rounded-full hover:bg-accent/8 hover:border-accent transition-all duration-200"
+              className="px-4 py-2 text-sm text-accent border border-accent/50 rounded-full hover:bg-accent/8 hover:border-accent transition-all duration-200"
             >
               Customize Request
             </a>
@@ -99,7 +104,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-glass border-b border-border overflow-hidden"
+            className="md:hidden bg-page/95 backdrop-blur-xl border-b border-border overflow-hidden"
           >
             <div className="px-4 py-4 space-y-3">
               {navLinks.map((link) => (
@@ -112,16 +117,18 @@ export default function Navbar() {
                 </button>
               ))}
               <div className="flex items-center gap-3 pt-3 border-t border-border">
-                <button
-                  onClick={toggleTheme}
-                  className="w-9 h-9 flex items-center justify-center rounded-full border border-border/60 text-muted hover:text-accent hover:border-accent transition-all duration-200 shrink-0"
-                  aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-                >
-                  {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
-                </button>
+                {mounted && (
+                  <button
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                    className="w-9 h-9 flex items-center justify-center rounded-full border border-border/60 text-muted hover:text-accent hover:border-accent transition-all duration-200 shrink-0"
+                    aria-label="Toggle theme"
+                  >
+                    {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+                  </button>
+                )}
                 <a
                   href="/customize"
-                  className="flex-1 text-center px-3 py-2 text-sm text-accent border border-accent/40 rounded-full hover:bg-accent/8 hover:border-accent transition-all duration-200"
+                  className="flex-1 text-center px-3 py-2 text-sm text-accent border border-accent/50 rounded-full hover:bg-accent/8 hover:border-accent transition-all duration-200"
                 >
                   Customize Request
                 </a>
