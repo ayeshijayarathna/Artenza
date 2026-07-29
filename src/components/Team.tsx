@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Instagram, Twitter, Linkedin } from "lucide-react";
+import { Globe, MessageCircle, Briefcase } from "lucide-react";
 import Reveal from "./Reveal";
 
 const team = [
@@ -63,14 +63,14 @@ export default function Team() {
                 <p className="text-muted text-sm mb-4">{member.role}</p>
                 <p className="text-muted/80 text-sm leading-relaxed mb-5">{member.bio}</p>
                 <div className="flex items-center justify-center gap-3">
-                  <a href="#" className="text-muted hover:text-accent transition-colors" aria-label="Instagram">
-                    <Instagram size={18} />
+                  <a href="#" className="text-muted hover:text-accent transition-colors" aria-label="Website">
+                    <Globe size={18} />
                   </a>
-                  <a href="#" className="text-muted hover:text-accent transition-colors" aria-label="Twitter">
-                    <Twitter size={18} />
+                  <a href="#" className="text-muted hover:text-accent transition-colors" aria-label="Message">
+                    <MessageCircle size={18} />
                   </a>
-                  <a href="#" className="text-muted hover:text-accent transition-colors" aria-label="LinkedIn">
-                    <Linkedin size={18} />
+                  <a href="#" className="text-muted hover:text-accent transition-colors" aria-label="Portfolio">
+                    <Briefcase size={18} />
                   </a>
                 </div>
               </motion.div>
