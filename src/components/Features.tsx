@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Cube, Brush, Shield, Truck, Bell, FileText } from "lucide-react";
+import { Box, Brush, Shield, Truck, Bell, FileText } from "lucide-react";
 import Reveal from "./Reveal";
 
 const features = [
   {
-    icon: Cube,
+    icon: Box,
     title: "3D Virtual Gallery",
     desc: "Explore immersive gallery rooms from your browser. Walk through curated spaces and view artworks in their intended environment.",
   },
