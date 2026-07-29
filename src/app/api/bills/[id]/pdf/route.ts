@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Bill from '@/models/Bill';
 import { generateInvoice } from '@/lib/pdf';

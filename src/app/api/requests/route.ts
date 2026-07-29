@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import CustomRequest from '@/models/CustomRequest';
 import { handleError, requireAuth, getSession } from '@/lib/api';
-import { createNotification } from '@/lib/notification';
 
 export async function GET(req: NextRequest) {
   try {

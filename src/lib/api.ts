@@ -1,31 +1,24 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import type { SessionUser } from '@/types/global';
 
 export async function getSession() {
-  return getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
+  return session as { user: SessionUser } | null;
 }
 
-export async function getCurrentUserId(): Promise<string | null> {
+export async function requireAuth(): Promise<string> {
   const session = await getSession();
-  return (session?.user as any)?.id ?? null;
-}
-
-export async function requireAuth() {
-  const userId = await getCurrentUserId();
-  if (!userId) {
-    throw new UnauthorizedError();
-  }
+  const userId = session?.user?.id;
+  if (!userId) throw new UnauthorizedError();
   return userId;
 }
 
-export async function requireAdmin() {
+export async function requireAdmin(): Promise<string> {
   const session = await getSession();
-  const user = session?.user as any;
-  if (!user?.id || user?.role !== 'admin') {
-    throw new ForbiddenError();
-  }
-  return user.id;
+  if (!session?.user?.id || session.user.role !== 'admin') throw new ForbiddenError();
+  return session.user.id;
 }
 
 export class AppError extends Error {

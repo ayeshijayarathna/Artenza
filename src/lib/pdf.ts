@@ -46,7 +46,6 @@ export function generateInvoice(data: InvoiceData): PDFKit.PDFDocument {
   doc.moveDown();
 
   // Bill info
-  const infoY = doc.y;
   doc.fontSize(10).font('Helvetica');
   doc.text(`Bill No:  ${data.billNumber}`, { align: 'left' });
   doc.text(`Order No: ${data.orderNumber}`, { align: 'left' });
