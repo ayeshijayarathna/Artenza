@@ -14,39 +14,63 @@ const artworks = [
   { id: 6, title: "Neon Horizon", artist: "Yuki Tanaka", price: "$3,900", category: "Digital", available: true, img: "https://images.unsplash.com/photo-1563089145-599997674d42?w=600&q=80" },
 ];
 
+function ArtImage({ src, alt }: { src: string; alt: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  return (
+    <div className="absolute inset-0 bg-image-fallback">
+      {!error && (
+        <img
+          src={src}
+          alt={alt}
+          className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-500 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+          onLoad={() => setLoaded(true)}
+          onError={() => setError(true)}
+        />
+      )}
+    </div>
+  );
+}
+
 export default function GalleryPreview() {
   const [active, setActive] = useState("All");
 
   const filtered = active === "All" ? artworks : artworks.filter((a) => a.category === active);
 
   return (
-    <section id="gallery" className="py-24 bg-page">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="gallery" className="relative py-28 overflow-hidden">
+      <div className="absolute inset-0 bg-grain pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
           <p className="text-accent text-sm tracking-[0.25em] uppercase font-medium">
             Explore Gallery
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-heading mt-3">
-            Curated Masterpieces
+          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-heading mt-4 leading-tight">
+            Curated
+            <br />
+            <span className="text-accent">Masterpieces</span>
           </h2>
-          <div className="w-14 h-0.5 bg-accent mx-auto mt-5" />
+          <div className="w-16 h-0.5 bg-gradient-to-r from-accent to-accent/30 mx-auto mt-6" />
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+              className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
                 active === cat
-                  ? "bg-accent text-white"
-                  : "bg-card border border-border text-muted hover:text-accent hover:border-accent"
+                  ? "bg-accent text-white shadow-md"
+                  : "bg-card/60 backdrop-blur-sm border border-border text-muted hover:text-accent hover:border-accent hover:bg-accent/5"
               }`}
             >
               {cat}
@@ -71,34 +95,31 @@ export default function GalleryPreview() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300"
+                className="group bg-card/80 backdrop-blur-sm border border-border rounded-2xl overflow-hidden hover:shadow-glow transition-all duration-300"
               >
                 <div className="relative overflow-hidden aspect-[4/3]">
-                  <img
-                    src={art.img}
-                    alt={art.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <ArtImage src={art.img} alt={art.title} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
                   <span
-                    className={`absolute top-3 right-3 px-2.5 py-0.5 text-[11px] font-medium rounded-full ${
+                    className={`absolute top-4 right-4 z-20 px-3 py-1 text-[11px] font-medium rounded-full backdrop-blur-md ${
                       art.available
-                        ? "bg-success/15 text-success"
-                        : "bg-muted/15 text-muted"
+                        ? "bg-success/30 text-white"
+                        : "bg-muted/30 text-white"
                     }`}
                   >
                     {art.available ? "Available" : "Sold"}
                   </span>
                 </div>
-                <div className="p-5">
+                <div className="p-5 relative z-10">
                   <h3 className="font-serif text-lg font-semibold text-heading">{art.title}</h3>
                   <p className="text-sm text-muted mt-0.5">{art.artist}</p>
                   <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
                     <span className="text-accent font-medium text-sm">{art.price}</span>
                     <div className="flex gap-2">
-                      <button className="px-3 py-1.5 text-xs text-accent border border-accent rounded-md hover:bg-accent/10 transition-colors">
+                      <button className="px-3 py-1.5 text-xs text-accent border border-accent/40 rounded-full hover:bg-accent/10 hover:border-accent transition-all duration-200">
                         View
                       </button>
-                      <button className="px-3 py-1.5 text-xs text-white bg-accent rounded-md hover:bg-accent-hover transition-colors">
+                      <button className="px-3 py-1.5 text-xs text-white bg-accent rounded-full hover:bg-accent-hover transition-all duration-200">
                         Buy Now
                       </button>
                     </div>

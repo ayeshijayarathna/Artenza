@@ -19,25 +19,25 @@
 }
 
 html.dark {
-  --bg-page-rgb: 30, 27, 24;
-  --bg-section-rgb: 38, 34, 31;
-  --bg-card-rgb: 42, 38, 35;
+  --bg-page-rgb: 18, 16, 15;
+  --bg-section-rgb: 26, 23, 21;
+  --bg-card-rgb: 38, 34, 31;
   --border-rgb: 58, 52, 47;
 
-  --accent-rgb: 208, 138, 101;
-  --accent-hover-rgb: 196, 122, 85;
-  --secondary-rgb: 178, 166, 192;
-  --success-rgb: 143, 179, 163;
+  --accent-rgb: 219, 153, 116;
+  --accent-hover-rgb: 206, 137, 98;
+  --secondary-rgb: 182, 170, 198;
+  --success-rgb: 147, 185, 167;
 
-  --text-heading-rgb: 245, 239, 230;
-  --text-body-rgb: 214, 204, 194;
-  --text-muted-rgb: 168, 159, 148;
+  --text-heading-rgb: 248, 243, 236;
+  --text-body-rgb: 218, 208, 196;
+  --text-muted-rgb: 172, 161, 148;
 }
 
 body {
   color: rgb(var(--text-body-rgb));
   background: rgb(var(--bg-page-rgb));
-  transition: color 0.3s, background-color 0.3s;
+  transition: color 0.35s, background-color 0.35s;
 }
 
 html {
@@ -48,10 +48,49 @@ html {
   .text-balance {
     text-wrap: balance;
   }
+
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  .bg-glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .dark .bg-glass {
+    background: rgba(38, 34, 31, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .shadow-soft {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04), 0 1px 8px rgba(0, 0, 0, 0.02);
+  }
+
+  .dark .shadow-soft {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), 0 1px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.08), 0 4px 24px rgba(0, 0, 0, 0.04);
+  }
+
+  .bg-image-fallback {
+    @apply bg-gradient-to-br from-accent/10 via-page to-accent/5;
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+
+  ::selection {
+    background: rgba(var(--accent-rgb), 0.2);
+    color: rgb(var(--text-heading-rgb));
   }
 }

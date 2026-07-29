@@ -24,10 +24,30 @@ const team = [
   },
 ];
 
+function Avatar({ src, alt }: { src: string; alt: string }) {
+  const [error, setError] = useState(false);
+
+  return (
+    <div className="w-24 h-24 mx-auto rounded-full overflow-hidden ring-2 ring-accent/30 ring-offset-2 ring-offset-card mb-5 bg-image-fallback">
+      {!error && (
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover"
+          onError={() => setError(true)}
+        />
+      )}
+    </div>
+  );
+}
+
+import { useState } from "react";
+
 export default function Team() {
   return (
-    <section id="team" className="py-24 bg-section">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="team" className="relative py-28 bg-section overflow-hidden">
+      <div className="absolute inset-0 bg-grain pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,10 +58,12 @@ export default function Team() {
           <p className="text-accent text-sm tracking-[0.25em] uppercase font-medium">
             Our Team
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-heading mt-3">
-            Meet the Visionaries
+          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-heading mt-4 leading-tight">
+            Meet the
+            <br />
+            <span className="text-accent">Visionaries</span>
           </h2>
-          <div className="w-14 h-0.5 bg-accent mx-auto mt-5" />
+          <div className="w-16 h-0.5 bg-gradient-to-r from-accent to-accent/30 mx-auto mt-6" />
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
@@ -52,29 +74,26 @@ export default function Team() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-card border border-border rounded-2xl p-8 text-center hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+              className="relative group bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-8 sm:p-10 text-center hover:-translate-y-1.5 hover:shadow-glow transition-all duration-300"
             >
-              <div className="w-24 h-24 mx-auto rounded-full overflow-hidden ring-2 ring-accent/30 ring-offset-2 ring-offset-card mb-5">
-                <img
-                  src={member.img}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="font-serif text-xl font-semibold text-heading">{member.name}</h3>
-              <p className="text-sm text-accent font-medium mt-1">{member.role}</p>
-              <p className="text-sm text-muted leading-relaxed mt-3 mb-5">{member.bio}</p>
-              <div className="flex justify-center gap-3">
-                {[Globe, MessageCircle, Briefcase].map((Icon, j) => (
-                  <a
-                    key={j}
-                    href="#"
-                    className="w-8 h-8 flex items-center justify-center rounded-full border border-border text-muted hover:text-accent hover:border-accent transition-colors"
-                    aria-label="Social link"
-                  >
-                    <Icon size={14} />
-                  </a>
-                ))}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="relative z-10">
+                <Avatar src={member.img} alt={member.name} />
+                <h3 className="font-serif text-xl font-semibold text-heading">{member.name}</h3>
+                <p className="text-sm text-accent font-medium mt-1">{member.role}</p>
+                <p className="text-sm text-muted leading-relaxed mt-3 mb-6">{member.bio}</p>
+                <div className="flex justify-center gap-3">
+                  {[Globe, MessageCircle, Briefcase].map((Icon, j) => (
+                    <a
+                      key={j}
+                      href="#"
+                      className="w-8 h-8 flex items-center justify-center rounded-full border border-border text-muted hover:text-accent hover:border-accent hover:bg-accent/5 transition-all duration-200"
+                      aria-label="Social link"
+                    >
+                      <Icon size={14} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
