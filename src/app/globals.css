@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-page-rgb: 251, 247, 242;
+  --bg-section-rgb: 245, 239, 230;
+  --bg-card-rgb: 255, 255, 255;
+  --border-rgb: 237, 230, 220;
+
+  --accent-rgb: 196, 114, 74;
+  --accent-hover-rgb: 181, 102, 62;
+  --secondary-rgb: 143, 123, 158;
+  --success-rgb: 122, 158, 138;
+
+  --amber-rgb: 217, 166, 78;
+  --amber-soft-rgb: 250, 241, 224;
+  --danger-rgb: 217, 83, 79;
+  --danger-soft-rgb: 251, 234, 232;
+
+  --text-heading-rgb: 44, 36, 32;
+  --text-body-rgb: 92, 74, 58;
+  --text-muted-rgb: 140, 123, 107;
+}
+
+.dark {
+  --bg-page-rgb: 22, 19, 18;
+  --bg-section-rgb: 33, 28, 25;
+  --bg-card-rgb: 33, 28, 25;
+  --border-rgb: 58, 48, 43;
+
+  --accent-rgb: 216, 138, 90;
+  --accent-hover-rgb: 200, 122, 74;
+  --secondary-rgb: 169, 149, 184;
+  --success-rgb: 136, 181, 155;
+
+  --amber-rgb: 224, 176, 96;
+  --amber-soft-rgb: 60, 50, 34;
+  --danger-rgb: 226, 105, 100;
+  --danger-soft-rgb: 66, 40, 38;
+
+  --text-heading-rgb: 248, 239, 230;
+  --text-body-rgb: 216, 200, 184;
+  --text-muted-rgb: 169, 154, 140;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  color: rgb(var(--text-body-rgb));
+  background: rgb(var(--bg-page-rgb));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease;
+}
+
+@layer utilities {
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--bg-section-rgb)) 25%,
+      rgb(var(--bg-card-rgb)) 50%,
+      rgb(var(--bg-section-rgb)) 75%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.4s infinite linear;
+  }
+}
