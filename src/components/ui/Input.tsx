@@ -6,12 +6,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   leftIcon?: ReactNode;
   error?: string;
+  hint?: string;
 }
 
 export default function Input({
   label,
   leftIcon,
   error,
+  hint,
   id,
   className = "",
   type = "text",
@@ -65,7 +67,11 @@ export default function Input({
           </label>
         )}
       </div>
-      {error && <p className="mt-1 text-xs text-danger pl-1">{error}</p>}
+      {error ? (
+        <p className="mt-1 text-xs text-danger pl-1">{error}</p>
+      ) : hint ? (
+        <p className="mt-1 text-xs text-muted pl-1">{hint}</p>
+      ) : null}
     </div>
   );
 }
